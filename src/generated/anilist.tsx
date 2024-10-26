@@ -4673,56 +4673,65 @@ export type YearStats = {
   year?: Maybe<Scalars['Int']['output']>;
 };
 
-export type GetMediaQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['Int']['input']>;
+export type GetMediaListQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']['input']>;
+  perPage?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetMediaQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null } | null } | null };
+export type GetMediaListQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', pageInfo?: { __typename?: 'PageInfo', currentPage?: number | null, hasNextPage?: boolean | null } | null, media?: Array<{ __typename?: 'Media', title?: { __typename?: 'MediaTitle', english?: string | null, romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', medium?: string | null } | null } | null> | null } | null };
 
 
-export const GetMediaDocument = gql`
-    query getMedia($id: Int) {
-  Media(id: $id, type: ANIME) {
-    id
-    title {
-      romaji
-      english
-      native
+export const GetMediaListDocument = gql`
+    query getMediaList($page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      currentPage
+      hasNextPage
+    }
+    media {
+      title {
+        english
+        romaji
+      }
+      coverImage {
+        medium
+      }
     }
   }
 }
     `;
 
 /**
- * __useGetMediaQuery__
+ * __useGetMediaListQuery__
  *
- * To run a query within a React component, call `useGetMediaQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMediaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetMediaListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMediaListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetMediaQuery({
+ * const { data, loading, error } = useGetMediaListQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      page: // value for 'page'
+ *      perPage: // value for 'perPage'
  *   },
  * });
  */
-export function useGetMediaQuery(baseOptions?: Apollo.QueryHookOptions<GetMediaQuery, GetMediaQueryVariables>) {
+export function useGetMediaListQuery(baseOptions?: Apollo.QueryHookOptions<GetMediaListQuery, GetMediaListQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetMediaQuery, GetMediaQueryVariables>(GetMediaDocument, options);
+        return Apollo.useQuery<GetMediaListQuery, GetMediaListQueryVariables>(GetMediaListDocument, options);
       }
-export function useGetMediaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMediaQuery, GetMediaQueryVariables>) {
+export function useGetMediaListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMediaListQuery, GetMediaListQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetMediaQuery, GetMediaQueryVariables>(GetMediaDocument, options);
+          return Apollo.useLazyQuery<GetMediaListQuery, GetMediaListQueryVariables>(GetMediaListDocument, options);
         }
-export function useGetMediaSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetMediaQuery, GetMediaQueryVariables>) {
+export function useGetMediaListSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetMediaListQuery, GetMediaListQueryVariables>) {
           const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetMediaQuery, GetMediaQueryVariables>(GetMediaDocument, options);
+          return Apollo.useSuspenseQuery<GetMediaListQuery, GetMediaListQueryVariables>(GetMediaListDocument, options);
         }
-export type GetMediaQueryHookResult = ReturnType<typeof useGetMediaQuery>;
-export type GetMediaLazyQueryHookResult = ReturnType<typeof useGetMediaLazyQuery>;
-export type GetMediaSuspenseQueryHookResult = ReturnType<typeof useGetMediaSuspenseQuery>;
-export type GetMediaQueryResult = Apollo.QueryResult<GetMediaQuery, GetMediaQueryVariables>;
+export type GetMediaListQueryHookResult = ReturnType<typeof useGetMediaListQuery>;
+export type GetMediaListLazyQueryHookResult = ReturnType<typeof useGetMediaListLazyQuery>;
+export type GetMediaListSuspenseQueryHookResult = ReturnType<typeof useGetMediaListSuspenseQuery>;
+export type GetMediaListQueryResult = Apollo.QueryResult<GetMediaListQuery, GetMediaListQueryVariables>;

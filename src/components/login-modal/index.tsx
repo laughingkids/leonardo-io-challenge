@@ -15,7 +15,7 @@ export const LoginModal = ({ isOpen = false }: LoginModalProps) => {
     (userDetail: UserDetail) => {
       setUserDetail(userDetail);
       setIsLoginModalOpen(false);
-      navigate('/user');
+      navigate('/user/p/1');
     },
     [setIsLoginModalOpen, setUserDetail]
   );
