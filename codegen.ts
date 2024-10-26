@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   generates: {
     'src/generated/anilist.tsx': {
       schema: `https://graphql.anilist.co`,
-      documents: 'src/app/graphql/anilist/**/*.graphql',
+      documents: 'src/graphql/anilist/**/*.graphql',
       plugins: [
         'typescript',
         'typescript-operations',

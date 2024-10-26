@@ -19,10 +19,13 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@libs/*": ["./src/libs/*"],
-      "@generated": ["./src/generated"]
+      "@generated": ["./src/generated"],
+      "@libs": ["./src/libs"],
+      "@models": ["./src/models"],
+      "@context": ["./src/context"],
+      "@components": ["./src/components"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/user-card/index.tsx"],
   "exclude": ["node_modules"]
 }
